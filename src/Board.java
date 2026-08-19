@@ -2,7 +2,7 @@ public class Board {
 
     private final Integer columns;
     private final Integer rows;
-    private Character[][] board;
+    private final Character[][] board;
     private final Character baseSymbol;
 
     public Board(Integer columns, Integer rows, Character baseSymbol) {
@@ -36,8 +36,4 @@ public class Board {
         return board[column][row];
     }
 
-
-    public void setBoard(Character[][] board) {
-        this.board = board;
-    }
 }

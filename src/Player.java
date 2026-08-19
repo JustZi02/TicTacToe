@@ -3,9 +3,9 @@ import java.util.List;
 
 public class Player {
 
-    private String name;
-    private char gameSymbol;
-    private List<GameTurn> gameTurns;
+    private final String name;
+    private final char gameSymbol;
+    private final List<GameTurn> gameTurns;
 
     public Player(String name, Character gameSymbol) {
         this.name = name;
