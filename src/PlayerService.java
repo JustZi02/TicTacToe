@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class PlayerService {
 
     public static Scanner scanner = new Scanner(System.in);
-    public static Player initializePlayer(Integer playerId, Character playerSymbol) {
+    public static Player initializePlayer(Character playerSymbol) {
         System.out.print("Player's name: ");
         String name = scanner.nextLine();
 
-        return new Player(playerId, name, playerSymbol);
+        return new Player(name, playerSymbol);
     }
 
     public static Player getPlayerBySymbol(List<Player> players, Character symbol) throws NoSuchElementException {

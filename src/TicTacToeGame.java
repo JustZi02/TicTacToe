@@ -2,14 +2,14 @@ import java.util.List;
 
 public class TicTacToeGame extends Game {
 
-    private final static Integer COLUMNS = 3;
-    private final static Integer ROWS = 3;
+    private final static int COLUMNS = 3;
+    private final static int ROWS = 3;
 
-    private final static Character BASE_SYMBOL = '-';
-    private final static Character O_SYMBOL = 'o';
-    private final static Character X_SYMBOL = 'x';
+    private final static char BASE_SYMBOL = '-';
+    private final static char O_SYMBOL = 'o';
+    private final static char X_SYMBOL = 'x';
 
-    private Board board;
+    private BoardService boardService;
     private Player player1;
     private Player player2;
 
@@ -20,25 +20,26 @@ public class TicTacToeGame extends Game {
     public void start() {
         initializeGame();
         while (continueGame) {
-            BoardService.drawBoard(board);
+            boardService.drawBoard();
             playRound();
             roundFinalCheck();
         }
     }
 
     private void roundFinalCheck() {
-        if (BoardService.containsFreeCells(board)) {
+        if (boardService.containsFreeCells()) {
             selectWinner();
-            BoardService.drawBoard(board);
         } else {
+            boardService.drawBoard();
             continueGame = false;
         }
     }
 
     private void selectWinner() {
-        char winnerSymbol = BoardService.selectWinnerSymbol(board);
-        if (winnerSymbol != board.getBaseSymbol()) {
+        char winnerSymbol = boardService.selectWinnerSymbol();
+        if (winnerSymbol != boardService.board().getBaseSymbol()) {
             Player winner = PlayerService.getPlayerBySymbol(List.of(player1, player2), winnerSymbol);
+            boardService.drawBoard();
             System.out.printf("Game end! %s is the winner!", winner.getName());
             System.out.println();
             continueGame = false;
@@ -51,12 +52,13 @@ public class TicTacToeGame extends Game {
     }
 
     private void playersInitializing() {
-        player1 = PlayerService.initializePlayer(1, O_SYMBOL);
-        player2 = PlayerService.initializePlayer(2, X_SYMBOL);
+        player1 = PlayerService.initializePlayer( O_SYMBOL);
+        player2 = PlayerService.initializePlayer(X_SYMBOL);
     }
 
     private void boardInitializing() {
-        board = BoardService.initializeBoard(ROWS, COLUMNS, BASE_SYMBOL);
+        boardService = new BoardService(new Board(COLUMNS, ROWS, BASE_SYMBOL));
+        boardService.fulfillBoard();
     }
 
     private void playRound() {
@@ -65,8 +67,9 @@ public class TicTacToeGame extends Game {
         System.out.printf("It's %s turn! (%s)", currentPlayer.getName(), currentPlayer.getGameSymbol());
         System.out.println();
 
-        currentPlayer.getGameTurns().add(GameTurnService.makeGameTurn(board, currentPlayer.getGameSymbol()));
-        BoardService.changeSymbol(currentPlayer.getGameTurns().getLast(), board);
+        currentPlayer.getGameTurns().add(GameTurnService.makeGameTurn(boardService.board(),
+                currentPlayer.getGameSymbol()));
+        boardService.changeSymbol(currentPlayer.getGameTurns().getLast());
 
         changePlayersTurn();
     }

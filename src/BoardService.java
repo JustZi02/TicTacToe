@@ -1,32 +1,26 @@
-public class BoardService {
+public record BoardService(Board board) {
 
-    public static void drawBoard(Board board) {
-        for(int column = 0; column < board.getColumns(); column++) {
-            for(int row = 0; row < board.getRows(); row++) {
+    public void drawBoard() {
+        for (int column = 0; column < board.getColumns(); column++) {
+            for (int row = 0; row < board.getRows(); row++) {
                 System.out.print(board.getBoard()[column][row]);
             }
             System.out.println();
         }
     }
 
-    public static Board initializeBoard(Integer rows, Integer columns, Character baseSymbol){
-        Board board = new Board(columns, rows, baseSymbol);
-        fulfillBoard(board);
-        return board;
-    }
+    public void fulfillBoard() {
 
-    public static void fulfillBoard(Board board) {
-
-        for(int column = 0; column < board.getColumns(); column++) {
-            for(int row = 0; row < board.getRows(); row++) {
+        for (int column = 0; column < board.getColumns(); column++) {
+            for (int row = 0; row < board.getRows(); row++) {
                 board.initializeBoardWithSymbol(column, row, board.getBaseSymbol());
             }
         }
     }
 
-    public static Boolean containsFreeCells(Board board) {
-        for(int column = 0; column < board.getColumns(); column++) {
-            for(int row = 0; row < board.getRows(); row++) {
+    public Boolean containsFreeCells() {
+        for (int column = 0; column < board.getColumns(); column++) {
+            for (int row = 0; row < board.getRows(); row++) {
                 if (board.getBoard()[column][row] == board.getBaseSymbol()) {
                     return true;
                 }
@@ -35,24 +29,24 @@ public class BoardService {
         return false;
     }
 
-    public static void changeSymbol(GameTurn gameTurn, Board board) {
+    public void changeSymbol(GameTurn gameTurn) {
         board.initializeBoardWithSymbol(gameTurn.getColumnIndex(), gameTurn.getRowIndex(), gameTurn.getSymbol());
     }
 
-    public static Character selectWinnerSymbol(Board board){
+    public Character selectWinnerSymbol() {
 
         Character result = board.getBaseSymbol();
-        result = threeInRowWinner(board) != board.getBaseSymbol() ? threeInRowWinner(board) : result;
-        result = threeInColumnWinner(board) != board.getBaseSymbol() ? threeInColumnWinner(board) : result;
-        result = threeInDiagonalWinner(board) != board.getBaseSymbol() ? threeInDiagonalWinner(board) : result;
+        result = threeInRowWinner() != board.getBaseSymbol() ? threeInRowWinner() : result;
+        result = threeInColumnWinner() != board.getBaseSymbol() ? threeInColumnWinner() : result;
+        result = threeInDiagonalWinner() != board.getBaseSymbol() ? threeInDiagonalWinner() : result;
 
         return result;
     }
 
-    private static Character threeInRowWinner(Board board) {
+    private Character threeInRowWinner() {
         char winner = board.getBaseSymbol();
 
-        for(int column = 0; column < board.getColumns() && winner == board.getBaseSymbol(); column++) {
+        for (int column = 0; column < board.getColumns() && winner == board.getBaseSymbol(); column++) {
             winner = board.getBoard()[0][column] == board.getBoard()[1][column] &&
                     board.getBoard()[1][column] == board.getBoard()[2][column] &&
                     board.getBoard()[0][column] != board.getBaseSymbol() ?
@@ -62,10 +56,10 @@ public class BoardService {
         return winner;
     }
 
-    private static Character threeInColumnWinner(Board board) {
+    private Character threeInColumnWinner() {
         char winner = board.getBaseSymbol();
 
-        for(int row = 0; row < board.getRows() && winner == board.getBaseSymbol(); row++) {
+        for (int row = 0; row < board.getRows() && winner == board.getBaseSymbol(); row++) {
             winner = board.getBoard()[row][0] == board.getBoard()[row][1] &&
                     board.getBoard()[row][1] == board.getBoard()[row][2] &&
                     board.getBoard()[row][0] != board.getBaseSymbol() ?
@@ -75,7 +69,7 @@ public class BoardService {
         return winner;
     }
 
-    private static Character threeInDiagonalWinner(Board board) {
+    private Character threeInDiagonalWinner() {
 
         char winner = board.getBaseSymbol();
 

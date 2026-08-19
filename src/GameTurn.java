@@ -1,13 +1,9 @@
 public class GameTurn {
-    private Integer columnIndex;
-    private Integer rowIndex;
-    private Character symbol;
-    private Boolean isTurnCompleted = false;
+    private int columnIndex;
+    private int rowIndex;
+    private char symbol;
+    private boolean isTurnCompleted = false;
 
-    public GameTurn(Integer columnIndex, Integer rowIndex) {
-        this.columnIndex = columnIndex;
-        this.rowIndex = rowIndex;
-    }
     public GameTurn() {
 
     }

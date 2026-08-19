@@ -11,10 +11,10 @@ public class GameTurnService {
 
         while (!gameTurn.getTurnCompleted()) {
             System.out.println("Enter column number (1, 2 ,3): ");
-            gameTurn.setColumnIndex(in.nextInt() - 1);
+            gameTurn.setColumnIndex(Validator.validateInteger() - 1);
 
             System.out.println("Enter row number (1, 2 ,3): ");
-            gameTurn.setRowIndex(in.nextInt() - 1);
+            gameTurn.setRowIndex(Validator.validateInteger() - 1);
 
             gameTurn.setTurnCompleted(isValidIndex(gameTurn, board));
             System.out.println(gameTurn.getTurnCompleted() ? "Well done!" : "Invalid column or row number!");
