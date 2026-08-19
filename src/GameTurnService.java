@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class GameTurnService {
 
-    public static Scanner in = new Scanner(System.in);
-
     public static GameTurn makeGameTurn(Board board, Character symbol) {
         GameTurn gameTurn = new GameTurn();
 
