@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class GameTurnService {
 
     public static GameTurn makeGameTurn(Board board, Character symbol) {
@@ -7,7 +5,7 @@ public class GameTurnService {
 
         gameTurn.setSymbol(symbol);
 
-        while (!gameTurn.getTurnCompleted()) {
+        while (!gameTurn.isTurnCompleted()) {
             System.out.println("Enter column number (1, 2 ,3): ");
             gameTurn.setColumnIndex(Validator.validateInteger() - 1);
 
@@ -15,7 +13,7 @@ public class GameTurnService {
             gameTurn.setRowIndex(Validator.validateInteger() - 1);
 
             gameTurn.setTurnCompleted(isValidIndex(gameTurn, board));
-            System.out.println(gameTurn.getTurnCompleted() ? "Well done!" : "Invalid column or row number!");
+            System.out.println(gameTurn.isTurnCompleted() ? "Well done!" : "Invalid column or row number!");
         }
         return gameTurn;
     }

@@ -12,4 +12,12 @@ public class Validator {
         return in.nextInt();
     }
 
+    public static String validateString() {
+        while (!in.hasNextLine()) {
+            System.out.println("Enter a valid string!");
+            in.nextLine();
+        }
+        return in.nextLine();
+    }
+
 }

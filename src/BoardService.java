@@ -47,10 +47,10 @@ public record BoardService(Board board) {
         char winner = board.getBaseSymbol();
 
         for (int column = 0; column < board.getColumns() && winner == board.getBaseSymbol(); column++) {
-            winner = board.getBoard()[0][column] == board.getBoard()[1][column] &&
-                    board.getBoard()[1][column] == board.getBoard()[2][column] &&
-                    board.getBoard()[0][column] != board.getBaseSymbol() ?
-                    board.getBoard()[0][column] : winner;
+            winner = board.getBoard()[column][0] == board.getBoard()[column][1] &&
+                    board.getBoard()[column][1] == board.getBoard()[column][2] &&
+                    board.getBoard()[column][0] != board.getBaseSymbol() ?
+                    board.getBoard()[column][0] : winner;
         }
 
         return winner;
@@ -60,10 +60,10 @@ public record BoardService(Board board) {
         char winner = board.getBaseSymbol();
 
         for (int row = 0; row < board.getRows() && winner == board.getBaseSymbol(); row++) {
-            winner = board.getBoard()[row][0] == board.getBoard()[row][1] &&
-                    board.getBoard()[row][1] == board.getBoard()[row][2] &&
-                    board.getBoard()[row][0] != board.getBaseSymbol() ?
-                    board.getBoard()[row][0] : winner;
+            winner = board.getBoard()[0][row] == board.getBoard()[1][row] &&
+                    board.getBoard()[1][row] == board.getBoard()[2][row] &&
+                    board.getBoard()[0][row] != board.getBaseSymbol() ?
+                    board.getBoard()[0][row] : winner;
         }
 
         return winner;

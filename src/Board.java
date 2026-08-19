@@ -1,4 +1,5 @@
 public class Board {
+
     private final Integer columns;
     private final Integer rows;
     private Character[][] board;

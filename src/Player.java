@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+
     private String name;
     private char gameSymbol;
     private List<GameTurn> gameTurns;

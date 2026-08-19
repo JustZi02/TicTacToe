@@ -26,33 +26,13 @@ public class TicTacToeGame extends Game {
         }
     }
 
-    private void roundFinalCheck() {
-        if (boardService.containsFreeCells()) {
-            selectWinner();
-        } else {
-            boardService.drawBoard();
-            continueGame = false;
-        }
-    }
-
-    private void selectWinner() {
-        char winnerSymbol = boardService.selectWinnerSymbol();
-        if (winnerSymbol != boardService.board().getBaseSymbol()) {
-            Player winner = PlayerService.getPlayerBySymbol(List.of(player1, player2), winnerSymbol);
-            boardService.drawBoard();
-            System.out.printf("Game end! %s is the winner!", winner.getName());
-            System.out.println();
-            continueGame = false;
-        }
-    }
-
     private void initializeGame() {
         playersInitializing();
         boardInitializing();
     }
 
     private void playersInitializing() {
-        player1 = PlayerService.initializePlayer( O_SYMBOL);
+        player1 = PlayerService.initializePlayer(O_SYMBOL);
         player2 = PlayerService.initializePlayer(X_SYMBOL);
     }
 
@@ -80,5 +60,25 @@ public class TicTacToeGame extends Game {
 
     private void changePlayersTurn() {
         isPlayer1Turn = !isPlayer1Turn;
+    }
+
+    private void roundFinalCheck() {
+        selectWinner();
+        if (!boardService.containsFreeCells()) {
+            System.out.println("Game end! There is no free cells left!");
+            continueGame = false;
+        }
+    }
+
+    private void selectWinner() {
+        char winnerSymbol = boardService.selectWinnerSymbol();
+        if (winnerSymbol != boardService.board().getBaseSymbol()) {
+            Player winner = PlayerService.getPlayerBySymbol(List.of(player1, player2), winnerSymbol);
+            boardService.drawBoard();
+            System.out.printf("Game end! %s is the winner!", winner.getName());
+            System.out.println();
+            continueGame = false;
+        }
+
     }
 }

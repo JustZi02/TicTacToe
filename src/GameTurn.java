@@ -1,4 +1,5 @@
 public class GameTurn {
+
     private int columnIndex;
     private int rowIndex;
     private char symbol;
@@ -8,35 +9,35 @@ public class GameTurn {
 
     }
 
-    public Integer getColumnIndex() {
+    public int getColumnIndex() {
         return columnIndex;
     }
 
-    public void setColumnIndex(Integer columnIndex) {
+    public void setColumnIndex(int columnIndex) {
         this.columnIndex = columnIndex;
     }
 
-    public Integer getRowIndex() {
+    public int getRowIndex() {
         return rowIndex;
     }
 
-    public void setRowIndex(Integer rowIndex) {
+    public void setRowIndex(int rowIndex) {
         this.rowIndex = rowIndex;
     }
 
-    public Character getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(Character symbol) {
+    public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
 
-    public Boolean getTurnCompleted() {
+    public boolean isTurnCompleted() {
         return isTurnCompleted;
     }
 
-    public void setTurnCompleted(Boolean turnCompleted) {
+    public void setTurnCompleted(boolean turnCompleted) {
         isTurnCompleted = turnCompleted;
     }
 }
